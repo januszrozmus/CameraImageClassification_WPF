@@ -1,0 +1,358 @@
+﻿<Window x:Class="CameraImageClassification_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CameraImageClassification_WPF" xmlns:usercontrols="clr-namespace:CameraImageClassification_WPF.UserControls"
+        mc:Ignorable="d"
+        Title="Camera Image Classification by Janusz Rozmus" Height="760" Width="1366">
+    <Grid Background="#FAFAFA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="310"/>
+            <ColumnDefinition Width="1053*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="700*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <ScrollViewer Margin="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="180"/>
+                        <RowDefinition Height="180"/>
+                        <RowDefinition Height="130"/>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Basic Parameters"  Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Name="lSize" Content="Size:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ComboBox Grid.Column="1" Grid.Row="0" Name="cbSize" Margin="0,2" VerticalAlignment="Center">
+                                <ComboBoxItem Name="cbi2592x1944" Content="2592x1944"/>
+                                <ComboBoxItem Name="cbi2048x1536" Content="2048x1536"/>
+                                <ComboBoxItem Name="cbi1920x1080" Content="1920x1080"/>
+                                <ComboBoxItem Name="cbi1600x1200" Content="1600x1200"/>
+                                <ComboBoxItem Name="cbi1280x960" Content="1280x960"/>
+                                <ComboBoxItem Name="cbi800x480" Content="800x480"/>
+                                <ComboBoxItem Name="cbi800x480_30fps" Content="800x480_30fps"/>
+                                <ComboBoxItem Name="cbi640x480" Content="640x480"/>
+                                <ComboBoxItem Name="cbi640x480_30fps" Content="640x480_30fps"/>
+                            </ComboBox>
+
+                            <Label Grid.Column="0" Grid.Row="1" Name="lPixelFormat" Content="PixelFormat:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Name="cbPixelFormat" Margin="0,2" VerticalAlignment="Center">
+                                <ComboBoxItem Name="cbiRGB32" Content="RGB32"/>
+                                <ComboBoxItem Name="cbiRGB15" Content="RGB15"/>
+                                <ComboBoxItem Name="cbiSensorRaw8" Content="SensorRaw8"/>
+                                <ComboBoxItem Name="cbiMono8" Content="Mono8"/>
+                            </ComboBox>
+
+                            <Label Grid.Column="0" Grid.Row="2" Name="lCompression" Content="Compression:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="2" Name="sCompression" VerticalAlignment="Center" Maximum="9" />
+                            <TextBox Grid.Column="2" Grid.Row="2" Name="tbCompression" VerticalAlignment="Center" Text="{Binding ElementName=sCompression, Path=Value, StringFormat=N2}"/>
+
+                            <Label Grid.Column="0" Grid.Row="3" Name="lCoordination" Content="Coordination:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                            <Label Grid.Column="0" Grid.Row="4" Name="lPixelClock" Content="Pixel Clock:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <Slider Grid.Column="1" Grid.Row="4" Name="sPixelClock" VerticalAlignment="Center" Minimum="9" Maximum="35" SmallChange="2"/>
+                            <TextBox Grid.Column="2" Grid.Row="4" Name="tbPixelClock" VerticalAlignment="Center"  Text="{Binding ElementName=sPixelClock, Path=Value, StringFormat=N0}"/>
+
+                            <Label Grid.Column="0" Grid.Row="5" Name="lFrameRate" Content="Frame Rate:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <Slider Grid.Column="1" Grid.Row="5" Name="sFrameRate" VerticalAlignment="Center" Maximum="30" Minimum="1"/>
+                            <TextBox Grid.Column="2" Grid.Row="5" Name="tbFrameRate" VerticalAlignment="Center"  Text="{Binding ElementName=sFrameRate, Path=Value, StringFormat=N2}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Brightness &amp; Contrast"  Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Label  Name="lAutomaticBC" Content="Automatic" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <RadioButton Name="rbAutomaticBC" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Label  Name="lManualBC" Content="Manual" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <RadioButton Name="rbManualBC" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            
+                            <Label Grid.Column="0" Grid.Row="1" Name="lBrightness" Content="Brightness:" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <Slider Grid.Column="1" Grid.Row="1" Name="sBrightness" VerticalAlignment="Center" Maximum="255" SmallChange="1" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <TextBox Grid.Column="2" Grid.Row="1" Name="tbBrightness" VerticalAlignment="Center" Text="{Binding ElementName=sBrightness, Path=Value, StringFormat=N0}" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+
+                            <Label Grid.Column="0" Grid.Row="2" Name="lExposure" Content="Exposure:" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <Slider Grid.Column="1" Grid.Row="2" Name="sExposure" VerticalAlignment="Center" Maximum="255" SmallChange="1" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <TextBox Grid.Column="2" Grid.Row="2" Name="tbExposure" VerticalAlignment="Center" Text="{Binding ElementName=sExposure, Path=Value, StringFormat=N0}" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+
+                            <Label Grid.Column="0" Grid.Row="3" Name="lGain" Content="Gain:" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <Slider Grid.Column="1" Grid.Row="3" Name="sGain" VerticalAlignment="Center" Maximum="99" SmallChange="1" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+                            <TextBox Grid.Column="2" Grid.Row="3" Name="tbGain" VerticalAlignment="Center" Text="{Binding ElementName=sGain, Path=Value, StringFormat=N0}" IsEnabled="{Binding ElementName=rbAutomaticBC , Path=IsChecked}"/>
+
+                            <Label Grid.Column="0" Grid.Row="4" Name="lExposuteTime" Content="Exposure Time:" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+                            <Slider Grid.Column="1" Grid.Row="4" Name="sExposureTime" VerticalAlignment="Center" Maximum="100" SmallChange="1" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+                            <TextBox Grid.Column="2" Grid.Row="4" Name="tbsExposureTime" VerticalAlignment="Center" Text="{Binding ElementName=sExposureTime, Path=Value, StringFormat=N0}" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+
+                            <Label Grid.Column="0" Grid.Row="5" Name="lEnhancement" Content="Enhancement:" VerticalAlignment="Center" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+                            <Slider Grid.Column="1" Grid.Row="5" Name="sEnhancement" VerticalAlignment="Center" Maximum="100" SmallChange="1" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+                            <TextBox Grid.Column="2" Grid.Row="5" Name="tbEnhancement" VerticalAlignment="Center" Text="{Binding ElementName=sEnhancement, Path=Value, StringFormat=N0}" IsEnabled="{Binding ElementName=rbManualBC , Path=IsChecked}"/>
+
+                            <Label Grid.Column="0" Grid.Row="6" Name="lBackLevelOffset" Content="Back Level Offset:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="6" Name="sBackLevelOffset" VerticalAlignment="Center" Maximum="255" SmallChange="1"/>
+                            <TextBox Grid.Column="2" Grid.Row="6" Name="tbBackLevelOffset" VerticalAlignment="Center" Text="{Binding ElementName=sBackLevelOffset, Path=Value, StringFormat=N0}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="2">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Color"  Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Name="lSaturation" Content="Saturation:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="0" Name="sSaturation" VerticalAlignment="Center" Maximum="155" Minimum="-100"/>
+                            <TextBox Grid.Column="2" Grid.Row="0" Name="tbSaturation" VerticalAlignment="Center" Text="{Binding ElementName=sSaturation, Path=Value, StringFormat=N0}"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" Name="lWhiteBalance" Content="White Balance:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                            <Label Grid.Column="0" Grid.Row="2" Name="lwbRed" Content="Red:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <Slider Grid.Column="1" Grid.Row="2" Name="swbRed" VerticalAlignment="Center" Maximum="121" Minimum="22"/>
+                            <TextBox Grid.Column="2" Grid.Row="2" Name="tbwbRed" VerticalAlignment="Center" Text="{Binding ElementName=swbRed, Path=Value, StringFormat=N0}"/>
+
+                            <Label Grid.Column="0" Grid.Row="3" Name="lwbBlue" Content="Blue:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <Slider Grid.Column="1" Grid.Row="3" Name="swbBlue" VerticalAlignment="Center" Maximum="94" Minimum="34"/>
+                            <TextBox Grid.Column="2" Grid.Row="3" Name="tbwbBlue" VerticalAlignment="Center" Text="{Binding ElementName=swbBlue, Path=Value, StringFormat=N0}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="3">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Sensor"  Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Name="lDigitalZoom" Content="Digital Zoom:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="0" Name="sDigitalZoom" VerticalAlignment="Center" Minimum="2"/>
+                            <TextBox Grid.Column="2" Grid.Row="0" Name="tbDigitalZoom" VerticalAlignment="Center" Text="{Binding ElementName=sDigitalZoom, Path=Value, StringFormat=N2}"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" Name="lImageEffect" Content="Image Effect:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Name="cbImageEffect" Margin="0,2" VerticalAlignment="Center">
+                                <ComboBoxItem Name="Disable" Content="Disable"/>
+                                <ComboBoxItem Name="Mono" Content="Mono"/>
+                                <ComboBoxItem Name="Sepia" Content="Sepia"/>
+                                <ComboBoxItem Name="Negative" Content="Negative"/>
+                            </ComboBox>
+
+                            <Label Grid.Column="0" Grid.Row="2" Name="lLensColor" Content="Lens Color:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ComboBox Grid.Column="1" Grid.Row="2" Name="cbLensColor" Margin="0,2" VerticalAlignment="Center">
+                                <ComboBoxItem Name="cbiAGL" Content="AGL"/>
+                                <ComboBoxItem Name="cbiTL84" Content="TL84"/>
+                                <ComboBoxItem Name="cbiD50" Content="D50"/>
+                                <ComboBoxItem Name="cbiD65" Content="D65"/>
+                            </ComboBox>
+
+                            <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Name="lBacklightCompensation" Content="Backlight Compensation:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <CheckBox Grid.Column="2" Grid.Row="3" Name="chbBacklightCompensation" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            <Label Grid.Column="0" Grid.Row="4" Name="lMirror" Content="Mirror:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <ComboBox Grid.Column="1" Grid.Row="4" Name="cbMirror" Margin="0,2" VerticalAlignment="Center" IsEnabled="{Binding ElementName=chbMirror , Path=IsChecked}">
+                                <ComboBoxItem Name="cbiVertical" Content="VERTICAL"/>
+                                <ComboBoxItem Name="cbiHorizontal" Content="HORIZONTAL"/>
+                            </ComboBox>
+                            <CheckBox Grid.Column="2" Grid.Row="4" Name="chbMirror" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="4">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Focus"  Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="lAutofocus" Content="Autofocus ON/OFF:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <CheckBox Grid.Column="2" Grid.Row="0" Name="chbAutofocus" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" Name="lFocus" Content="Focus:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="1" Name="sFocus" VerticalAlignment="Center" Maximum="240" Minimum="110"/>
+                            <TextBox Grid.Column="2" Grid.Row="1" Name="tbFocus" VerticalAlignment="Center" Text="{Binding ElementName=sFocus, Path=Value, StringFormat=N0}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Noise Reduction &amp; Gamma" Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="lNoiseReduction" Content="Noise Reduction ON/OFF:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <CheckBox Grid.Column="2" Grid.Row="0" Name="chbNoiseReduction" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Name="lHardware" Content="Hardware ON/OFF:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <CheckBox Grid.Column="2" Grid.Row="1" Name="chbHardware" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="6">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Sharpness" Foreground="DarkBlue" FontWeight="Medium"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Name="lSharpness" Content="Sharpness:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="0" Name="sSharpness" VerticalAlignment="Center" Maximum="8" Minimum="-2"/>
+                            <TextBox Grid.Column="2" Grid.Row="0" Name="tbSharpness" VerticalAlignment="Center" Text="{Binding ElementName=sSharpness, Path=Value, StringFormat=N0}"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" Name="lContrast" Content="Contrast:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Slider Grid.Column="1" Grid.Row="1" Name="sContrast" VerticalAlignment="Center" Maximum="9"/>
+                            <TextBox Grid.Column="2" Grid.Row="1" Name="tbContrast" VerticalAlignment="Center" Text="{Binding ElementName=sContrast, Path=Value, StringFormat=N0}"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid Name="gLive" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Border BorderBrush="DarkBlue" BorderThickness="1" CornerRadius="5" Margin="4">
+                        <Image Name="iCapture"/>
+                    </Border>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel>
+                            <Button Name="btTakePhoto" Content="Take Photo" Margin="6,5,6,5"/>
+                            <Button Name="btCheckPhoto" Content="Check Photo" Margin="6,5,6,5"/>
+                            <Grid Name="gStatus" Margin="6">
+                                <Border BorderBrush="Black" BorderThickness="1" Background="#F1F1F1" CornerRadius="10">
+                                    <StackPanel>
+                                        <TextBlock Name="tbStatusPercent" Text="100%" Foreground="Green" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                        <TextBlock Name="tbStatus" Text="OK" Foreground="Green" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="6">
+                        <DataGrid Name="dgClassGroup"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Name="gImageList" Grid.Row="1">
+                <GroupBox Name="gbClassifyImages">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Name="spImageClassificationList"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                </GroupBox>
+            </Grid>
+            <Grid Name="gLearn" Grid.Row="2" Background="Azure">
+                <Button x:Name="btLearn" Content="Learn" Margin="5"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
